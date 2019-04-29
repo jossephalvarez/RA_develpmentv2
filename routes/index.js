@@ -5,6 +5,8 @@ const typeController = require('../controllers').type;
 const supplyController = require('../controllers').supply;
 const productController = require('../controllers').product;
 const locationController = require('../controllers').location;
+const userController = require('../controllers').user;
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -34,5 +36,7 @@ router.get('/api/location/:id', locationController.getById);
 router.post('/api/location', locationController.add);
 router.delete('/api/location/:id', locationController.delete);
 
+/*User Router*/
+router.get('/api/user', personController.list);
 
 module.exports = router;
