@@ -96,7 +96,7 @@ module.exports = {
             .findAll({
                 where: {
                     UserId: req.params.UserId,
-                    location_id:req.params.location_id
+                    location_id: req.params.location_id
                 },
                 include: [{
                     model: Product,
@@ -115,5 +115,50 @@ module.exports = {
                 res.status(400).send(error);
             });
     },
+    add(req, res) {
+        return Supply
+            .create({
+                date: req.body.date,
+                location_id: req.body.location_id,
+                UserId: req.body.UserId
+            })
+            .then((supply) => {
+                if (!supply) {
+                    return res.status(404).send({
+                        message: 'supply Not created',
+                    });
+                }
+                let products = req.body.listProducts;
+                if (products.length > 0) {
+                    products.forEach(p => {
+                        Product.findById(p.product_id).then((product) => {
+                            if (!product) {
+                                return res.status(404).send({
+                                    message: 'Product Not Found',
+                                });
+                            }
+                            SupplyProduct.create({
+                                supply_id: supply.id,
+                                product_id: product.id,
+                                quantity: p.quantity
+                            })
+                                .then((supplyProduct) => {
+                                    if (!supplyProduct) {
+                                        return res.status(404).send({
+                                            message: 'supplyProduct Not created',
+                                        });
+                                    }
+                                    return res.status(200).send(supplyProduct);
+                                })
 
+                        })
+                    })
+                }else{
+                    return res.status(404).send({
+                        message: 'supplyProduct Not created',
+                    });
+                }
+            })
+            .catch((error) => res.status(400).send(error));
+    }
 };

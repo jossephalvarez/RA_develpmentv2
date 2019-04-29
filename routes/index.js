@@ -27,6 +27,7 @@ router.get('/api/product/:id', productController.getById);
 
 /*Supply Router*/
 router.get('/api/supply', supplyController.list);
+router.post('/api/supply', supplyController.add);
 router.get('/api/supply/products', supplyController.listProducts);
 router.get('/api/supply/:id', supplyController.getById);
 router.get('/api/supply/user/:UserId', supplyController.listByUser);
