@@ -9,6 +9,7 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             date: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             location_id: {

@@ -4,6 +4,7 @@ var router = express.Router();
 const typeController = require('../controllers').type;
 const supplyController = require('../controllers').supply;
 const productController = require('../controllers').product;
+const locationController = require('../controllers').location;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -20,6 +21,9 @@ router.get('/api/productWithSupplies', productController.listWithSupplies);
 
 /*Supply Router*/
 router.get('/api/supply', supplyController.list);
+
+/*Location Router*/
+router.get('/api/location', locationController.list);
 
 
 module.exports = router;
