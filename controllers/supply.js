@@ -96,7 +96,10 @@ module.exports = {
             .findAll({
                 where: {
                     UserId: req.params.UserId,
-                    location_id: req.params.location_id
+                    location_id: req.params.location_id,
+                    date:{
+                        "$between": ["20/04/2019","20/05/2019"]
+                    }
                 },
                 include: [{
                     model: Product,
@@ -153,7 +156,7 @@ module.exports = {
 
                         })
                     })
-                }else{
+                } else {
                     return res.status(404).send({
                         message: 'supplyProduct Not created',
                     });
