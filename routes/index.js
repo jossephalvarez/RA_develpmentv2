@@ -13,6 +13,7 @@ router.get('/', function (req, res, next) {
 
 /*TypeProduct Router*/
 router.get('/api/type', typeController.list); //OK
+router.get('/api/type/:id', typeController.getById); //OK
 router.get('/api/type/products', typeController.listWithProducts); //OK
 
 /*Product Router*/
@@ -23,6 +24,7 @@ router.get('/api/product/:id', productController.getById);
 /*Supply Router*/
 router.get('/api/supply', supplyController.list);
 router.get('/api/supply/products', supplyController.listProducts);
+router.get('/api/supply/:id', supplyController.getById);
 
 /*Location Router*/
 router.get('/api/location', locationController.list);

@@ -24,4 +24,18 @@ module.exports = {
                 res.status(400).send(error);
             });
     },
+    getById(req, res) {
+        return Supply
+            .findById(req.params.id)
+            .then((supply) => {
+                if (!supply) {
+                    return res.status(404).send({
+                        message: 'Supply Not Found',
+                    });
+                }
+                return res.status(200).send(supply);
+            })
+            .catch((error) => res.status(400).send(error));
+    },
+
 };
