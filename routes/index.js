@@ -37,6 +37,6 @@ router.post('/api/location', locationController.add);
 router.delete('/api/location/:id', locationController.delete);
 
 /*User Router*/
-router.get('/api/user', personController.list);
+router.get('/api/user', userController.list);
 
 module.exports = router;

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         Supply.belongsTo(models.Location, {
             foreignKey: 'location_id'
         });
-        Supply.belongsTo(models.Person, {
+        Supply.belongsTo(models.User, {
             foreignKey: 'provider_id',
         });
     };
