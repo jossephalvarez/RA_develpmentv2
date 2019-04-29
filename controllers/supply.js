@@ -57,7 +57,7 @@ module.exports = {
                 }],
             })
             .then((supplies) => {
-                if (!supplies) {
+                if (supplies.length == 0) {
                     return res.status(404).send({
                         message: 'Supplies Not Found',
                     });
@@ -95,7 +95,8 @@ module.exports = {
         return Supply
             .findAll({
                 where: {
-                    UserId: req.params.UserId
+                    UserId: req.params.UserId,
+                    location_id:req.params.location_id
                 },
                 include: [{
                     model: Product,
