@@ -1,12 +1,13 @@
 const Supply = require('../models').Supply;
 const Product = require('../models').Product;
+const User = require('../models').User;
 const Location = require('../models').Location;
 const SupplyProduct = require('../models').SupplyProduct;
 
 module.exports = {
     list(req, res) {
         return Supply
-            .findAll()
+            .all()
             .then((supplies) => res.status(200).send(supplies))
             .catch((error) => {
                 res.status(400).send(error);

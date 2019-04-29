@@ -6,12 +6,11 @@ module.exports = {
     list(req, res) {
         return Location
             .findAll(
-                /*   {
-                       include: [{
-                           model: Supply,
-                           as: 'supplies'
-                       }],
-                   }*/
+                /*{
+                    include: [{
+                        model: Supply
+                    }],
+                }*/
             )
             .then((locations) => res.status(200).send(locations))
             .catch((error) => {
