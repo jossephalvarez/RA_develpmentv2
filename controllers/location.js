@@ -6,9 +6,10 @@ module.exports = {
     list(req, res) {
         return Location
             .findAll(
-                /*{
+              /* {
                     include: [{
-                        model: Supply
+                        model: Supply,
+                        as: 'supplies'
                     }],
                 }*/
             )

@@ -29,6 +29,9 @@ router.get('/api/product/:id', productController.getById);
 router.get('/api/supply', supplyController.list);
 router.get('/api/supply/products', supplyController.listProducts);
 router.get('/api/supply/:id', supplyController.getById);
+router.get('/api/supply/user/:UserId', supplyController.listByUser);
+router.get('/api/supply/location/:location_id', supplyController.listByLocation);
+router.get('/api/supply/:UserId/:location_id', supplyController.listByUserAndLocation);
 
 /*Location Router*/
 router.get('/api/location', locationController.list);
