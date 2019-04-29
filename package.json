@@ -1,0 +1,27 @@
+{
+  "name": "ra_develpmentv2",
+  "version": "1.0.0",
+  "description": "Project to check sequelize",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon ./bin/www"
+  },
+  "author": "Josseph Alvarez Villa",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "^4.16.4",
+    "http-errors": "~1.6.2",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.6",
+    "sequelize-cli": "^5.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
