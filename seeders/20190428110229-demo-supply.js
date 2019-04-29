@@ -5,14 +5,14 @@ module.exports = {
         return queryInterface.bulkInsert('supplies', [{
             date: '13/04/2019',
             location_id: 1,
-            provider_id: 2,
+            UserId: 2,
             createdAt: new Date(), updatedAt: new Date()
 
         },
             {
                 date: '20/04/2019',
                 location_id: 1,
-                provider_id: 2,
+                UserId: 2,
                 createdAt: new Date(), updatedAt: new Date()
 
 
@@ -20,7 +20,7 @@ module.exports = {
             {
                 date: '13/04/2019',
                 location_id: 2,
-                provider_id: 3,
+                UserId: 3,
                 createdAt: new Date(), updatedAt: new Date()
             }], {});
     },

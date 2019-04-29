@@ -20,7 +20,7 @@ module.exports = {
                     model: 'Locations',
                     key: 'id'
                 }
-            }, provider_id: {
+            }, UserId: {
                 type: Sequelize.INTEGER,
                 onDelete: "CASCADE",
                 allowNull: false,

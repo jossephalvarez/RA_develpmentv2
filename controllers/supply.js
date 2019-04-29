@@ -7,7 +7,7 @@ const SupplyProduct = require('../models').SupplyProduct;
 module.exports = {
     list(req, res) {
         return Supply
-            .all()
+            .findAll()
             .then((supplies) => res.status(200).send(supplies))
             .catch((error) => {
                 res.status(400).send(error);
