@@ -6,12 +6,12 @@ module.exports = {
     list(req, res) {
         return Location
             .findAll(
-             /*   {
-                    include: [{
-                        model: Supply,
-                        as: 'supplies'
-                    }],
-                }*/
+                /*   {
+                       include: [{
+                           model: Supply,
+                           as: 'supplies'
+                       }],
+                   }*/
             )
             .then((locations) => res.status(200).send(locations))
             .catch((error) => {
@@ -31,4 +31,32 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
+    add(req, res) {
+        return Location
+            .create({
+                name: req.body.name,
+                address: req.body.address,
+                province: req.body.province,
+                city: req.body.city
+            })
+            .then((location) => res.status(201).send(location))
+            .catch((error) => res.status(400).send(error));
+    },
+    delete(req, res) {
+        return Location
+            .findById(req.params.id)
+            .then(location => {
+                if (!location) {
+                    return res.status(400).send({
+                        message: 'Location Not Found',
+                    });
+                }
+                return location
+                    .destroy()
+                    .then(() => res.status(204).send())
+                    .catch((error) => res.status(400).send(error));
+            })
+            .catch((error) => res.status(400).send(error));
+    },
+
 };
