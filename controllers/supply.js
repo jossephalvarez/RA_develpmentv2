@@ -160,5 +160,21 @@ module.exports = {
                 }
             })
             .catch((error) => res.status(400).send(error));
-    }
+    },
+    delete(req, res) {
+        return Supply
+            .findById(req.params.id)
+            .then(supply => {
+                if (!supply) {
+                    return res.status(400).send({
+                        message: 'supply Not Found',
+                    });
+                }
+                return supply
+                    .destroy()
+                    .then(() => res.status(204).send())
+                    .catch((error) => res.status(400).send(error));
+            })
+            .catch((error) => res.status(400).send(error));
+    },
 };
