@@ -5,15 +5,30 @@ const SupplyProduct = require('../models').SupplyProduct;
 module.exports = {
     list(req, res) {
         return Location
-            .findAll({
-                include: [{
-                    model: Supply,
-                    as: 'supplies'
-                }],
-            })
+            .findAll(
+             /*   {
+                    include: [{
+                        model: Supply,
+                        as: 'supplies'
+                    }],
+                }*/
+            )
             .then((locations) => res.status(200).send(locations))
             .catch((error) => {
                 res.status(400).send(error);
             });
+    },
+    getById(req, res) {
+        return Location
+            .findById(req.params.id)
+            .then((location) => {
+                if (!location) {
+                    return res.status(404).send({
+                        message: 'Location Not Found',
+                    });
+                }
+                return res.status(200).send(location);
+            })
+            .catch((error) => res.status(400).send(error));
     },
 };

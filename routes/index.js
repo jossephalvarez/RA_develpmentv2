@@ -13,17 +13,20 @@ router.get('/', function (req, res, next) {
 
 /*TypeProduct Router*/
 router.get('/api/type', typeController.list); //OK
-router.get('/api/typeWithProducts', typeController.listWithProducts); //OK
+router.get('/api/type/products', typeController.listWithProducts); //OK
 
 /*Product Router*/
 router.get('/api/product', productController.list);//OK
-router.get('/api/productWithSupplies', productController.listWithSupplies);
+router.get('/api/product/supplies', productController.listWithSupplies);
+router.get('/api/product/:id', productController.getById);
 
 /*Supply Router*/
 router.get('/api/supply', supplyController.list);
+router.get('/api/supply/products', supplyController.listProducts);
 
 /*Location Router*/
 router.get('/api/location', locationController.list);
+router.get('/api/location/:id', locationController.getById);
 
 
 module.exports = router;

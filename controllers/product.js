@@ -30,4 +30,17 @@ module.exports = {
                 res.status(400).send(error);
             });
     },
+    getById(req, res) {
+        return Product
+            .findById(req.params.id)
+            .then((product) => {
+                if (!product) {
+                    return res.status(404).send({
+                        message: 'product Not Found',
+                    });
+                }
+                return res.status(200).send(product);
+            })
+            .catch((error) => res.status(400).send(error));
+    },
 };
