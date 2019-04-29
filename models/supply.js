@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         Supply.belongsTo(models.Location, {
             foreignKey: 'location_id'
         });
+        Supply.belongsTo(models.People, {
+            foreignKey: 'provider_id',
+        });
     };
     return Supply;
 };

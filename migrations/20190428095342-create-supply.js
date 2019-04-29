@@ -20,6 +20,14 @@ module.exports = {
                     model: 'Locations',
                     key: 'id'
                 }
+            }, provider_id: {
+                type: Sequelize.INTEGER,
+                onDelete: "CASCADE",
+                allowNull: false,
+                references: {
+                    model: 'People',
+                    key: 'id'
+                }
             },
             createdAt: {
                 allowNull: false,
