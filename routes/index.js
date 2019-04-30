@@ -36,6 +36,9 @@ router.get('/api/supply/:UserId/:location_id', supplyController.listByUserAndLoc
 router.post('/api/supply/:UserId/:location_id', supplyController.listByUserAndLocationByDates);
 router.delete('/api/supply/:id', supplyController.delete);
 
+/*supplyProduct*/
+router.put('/api/supplyProduct/:id', supplyController.updateSupplyProduct);
+
 /*Location Router*/
 router.get('/api/location', locationController.list);
 router.get('/api/location/:id', locationController.getById);

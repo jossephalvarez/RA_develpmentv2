@@ -116,31 +116,36 @@ module.exports = {
             });
     },
     listByUserAndLocationByDates(req, res) {
-        return Supply
-            .findAll({
-                where: {
-                    UserId: req.params.UserId,
-                    location_id: req.params.location_id,
-                    date: {
-                        "$between": [req.body.date_start, req.body.date_end]
+        if (!req.body.date_start || !req.body.date_end)
+            res.status(400).send("Dates not defined");
+        else {
+            return Supply
+                .findAll({
+                    where: {
+                        UserId: req.params.UserId,
+                        location_id: req.params.location_id,
+                        date: {
+                            "$between": [req.body.date_start, req.body.date_end]
+                        }
+                    },
+                    include: [{
+                        model: Product,
+                        as: 'products'
+                    }],
+                })
+                .then((supplies) => {
+                    if (supplies.length == 0) {
+                        return res.status(404).send({
+                            message: 'Supplies Not Found',
+                        });
                     }
-                },
-                include: [{
-                    model: Product,
-                    as: 'products'
-                }],
-            })
-            .then((supplies) => {
-                if (supplies.length == 0) {
-                    return res.status(404).send({
-                        message: 'Supplies Not Found',
-                    });
-                }
-                return res.status(200).send(supplies);
-            })
-            .catch((error) => {
-                res.status(400).send(error);
-            });
+                    return res.status(200).send(supplies);
+                })
+                .catch((error) => {
+                    res.status(400).send(error);
+                });
+        }
+
     },
     add(req, res) {
         return Supply
@@ -204,4 +209,22 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
+  /*  updateSupplyProduct(req, res) {
+        return SupplyProduct
+            .findById(req.params.id)
+            .then(supplyProduct => {
+                if (!supplyProduct) {
+                    return res.status(404).send({
+                        message: 'supplyProduct Not Found',
+                    });
+                }
+                return supplyProduct
+                    .update({
+                        quantity: req.body.quantity,
+                    })
+                    .then(() => res.status(200).send(supplyProduct))
+                    .catch((error) => res.status(400).send(error));
+            })
+            .catch((error) => res.status(400).send(error));
+    },*/
 };
