@@ -3,18 +3,12 @@ const Product = require('../models').Product;
 const User = require('../models').User;
 const Location = require('../models').Location;
 const SupplyProduct = require('../models').SupplyProduct;
+const TypeProduct = require('../models').TypeProduct;
 
 module.exports = {
     list(req, res) {
         return Supply
-            .findAll(
-                /* {
-                     include: [{
-                         model: Location,
-                         as: 'location'
-                     }],
-                 }*/
-            )
+            .findAll()
             .then((supplies) => res.status(200).send(supplies))
             .catch((error) => {
                 res.status(400).send(error);
@@ -34,7 +28,27 @@ module.exports = {
     },
     getById(req, res) {
         return Supply
-            .findById(req.params.id)
+        //.findById(req.params.id)
+        //Resume JSON
+            .findOne({
+                where: {id: req.params.id},
+                attributes: {exclude: ['createdAt', 'updatedAt']},
+                include: [{
+                    model: Product,
+                    as: 'products',
+                    attributes: ['id'],
+                    through: {
+                        model: SupplyProduct,
+                        attributes: {
+                            include: ['id', 'quantity'],
+                            exclude: ['createdAt', 'updatedAt', 'supply_id', 'product_id']
+                        }
+                    },
+                    // through:{
+                    //     model:TypeProduct
+                    // }
+                }],
+            })
             .then((supply) => {
                 if (!supply) {
                     return res.status(404).send({
@@ -209,22 +223,65 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
-  /*  updateSupplyProduct(req, res) {
-        return SupplyProduct
-            .findById(req.params.id)
-            .then(supplyProduct => {
-                if (!supplyProduct) {
+    updateSupplyProduct(req, res) {
+        return Supply
+            .findOne({
+                where: {id: req.params.id},
+                attributes: {exclude: ['createdAt', 'updatedAt']},
+                include: [{
+                    model: Product,
+                    as: 'products',
+                    attributes: ['id'],
+                    through: {
+                        model: SupplyProduct,
+                       /* attributes: {
+                            include: ['id', 'quantity'],
+                            exclude: ['createdAt', 'updatedAt', 'supply_id', 'product_id']
+                        }*/
+                    },
+                    // through:{
+                    //     model:TypeProduct
+                    // }
+                }],
+            })
+            .then(supply => {
+                if (!supply) {
                     return res.status(404).send({
-                        message: 'supplyProduct Not Found',
+                        message: 'supply Not Found',
                     });
                 }
-                return supplyProduct
-                    .update({
-                        quantity: req.body.quantity,
-                    })
-                    .then(() => res.status(200).send(supplyProduct))
+                //return res.status(200).send(supply);
+                let sProducts = supply.products;
+                // console.log("NUMBER---" + (sProducts.length));
+                //
+                return sProducts[0].SupplyProduct.update({
+                    quantity: 887
+                })
+                    .then((supplyProduct) => res.status(200).send(supplyProduct))
                     .catch((error) => res.status(400).send(error));
+
+                /*  if (sProducts.length > 0) {
+                      let indexSupplyProduct = 0;
+                      sProducts.forEach(p => {
+                          //console.log(p.SupplyProduct);
+                          console.log("indexSupplyProduct---" + indexSupplyProduct);
+                          console.log(req.body.products[indexSupplyProduct].SupplyProduct.quantity);
+                          indexSupplyProduct++;
+                          /!*  p.SupplyProduct.update({
+                                quantity: 100
+                            }).then((s) => {
+                                indexSupplyProduct++;
+                                if (!s) {
+                                    return res.status(404).send({
+                                        message: 'supplyProduct Not Updated',
+                                    });
+                                }
+                                return res.status(200).send(s);
+                            })*!/
+                      })
+                  }*/
+
             })
             .catch((error) => res.status(400).send(error));
-    },*/
+    }
 };
