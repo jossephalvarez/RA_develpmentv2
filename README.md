@@ -32,6 +32,8 @@ To run the backend :
 ```
 npm run start:dev
 ```
+You can see the endPoints on /routes/index.js , enjoy it on Postman!
+
 
 Following the documentation :http://docs.sequelizejs.com/manual/migrations.html
 
