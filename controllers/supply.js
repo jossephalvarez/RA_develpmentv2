@@ -96,9 +96,33 @@ module.exports = {
             .findAll({
                 where: {
                     UserId: req.params.UserId,
+                    location_id: req.params.location_id
+                },
+                include: [{
+                    model: Product,
+                    as: 'products'
+                }],
+            })
+            .then((supplies) => {
+                if (supplies.length == 0) {
+                    return res.status(404).send({
+                        message: 'Supplies Not Found',
+                    });
+                }
+                return res.status(200).send(supplies);
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+    },
+    listByUserAndLocationByDates(req, res) {
+        return Supply
+            .findAll({
+                where: {
+                    UserId: req.params.UserId,
                     location_id: req.params.location_id,
-                    date:{
-                        "$between": ["20/04/2019","20/05/2019"]
+                    date: {
+                        "$between": [req.body.date_start, req.body.date_end]
                     }
                 },
                 include: [{

@@ -33,6 +33,7 @@ router.get('/api/supply/:id', supplyController.getById);
 router.get('/api/supply/user/:UserId', supplyController.listByUser);
 router.get('/api/supply/location/:location_id', supplyController.listByLocation);
 router.get('/api/supply/:UserId/:location_id', supplyController.listByUserAndLocation);
+router.post('/api/supply/:UserId/:location_id', supplyController.listByUserAndLocationByDates);
 router.delete('/api/supply/:id', supplyController.delete);
 
 /*Location Router*/
