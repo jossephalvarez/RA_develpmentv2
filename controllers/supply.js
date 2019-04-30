@@ -223,7 +223,7 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
-    updateSupplyProduct(req, res) {
+   updateSupplyProduct(req, res) {
         return Supply
             .findOne({
                 where: {id: req.params.id},
@@ -255,11 +255,11 @@ module.exports = {
                 if (sProducts.length > 0) {
                     let indexSupplyProduct = 0;
                     sProducts.forEach(p => {
-
-                        sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
+                       sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
                             quantity: req.body.products[indexSupplyProduct].SupplyProduct.quantity
                         });
                         indexSupplyProduct++;
+                        // CHECK THE RETURN AWAIT/ASYNC
                         /*  .then((s) => {
                               indexSupplyProduct++;
                               if (!s) {
