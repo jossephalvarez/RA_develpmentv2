@@ -34,6 +34,8 @@ npm run start:dev
 ```
 You can see the endPoints on /routes/index.js , enjoy it on Postman!
 
+Postman Collection Here!!! -> https://www.getpostman.com/collections/7465d063ba5545854743
+
 
 Following the documentation :http://docs.sequelizejs.com/manual/migrations.html
 
