@@ -2,6 +2,7 @@
 
 Example to show the power of sequelize client following the documentation http://docs.sequelizejs.com/manual/migrations.html
 # BD
+This tables are gonna to generating after the  project setup.
 ![My BD](https://user-images.githubusercontent.com/17790050/56949780-0baefe80-6b34-11e9-8850-452453240211.png)
 
 ## Getting Started
@@ -17,17 +18,22 @@ Mysql 5.7.25.0
 
 Clone the repo or donwload the code.
 
-Run the next command to start. 
+Run the next commands to start the project
 
 ```
 npm install
+sequelize db:drop
+sequelize db:create
+sequelize db:migrate
+sequelize db:seed:all
+```
+To run the backend : 
+
+```
+npm run start:dev
 ```
 
-Following the documentation :http://docs.sequelizejs.com/manual/migrations.html , you should create the database on mysql as a first step 
-
-```
-create database ra_development
-```
+Following the documentation :http://docs.sequelizejs.com/manual/migrations.html
 
 In this example, I've created a model User with this command : 
 ```
@@ -35,10 +41,7 @@ sequelize model:generate --name User --attributes firstName:string,lastName:stri
 ```
 You can create another model with different name and attributes. For more information, you can see [Creating first Model (and Migration)](http://docs.sequelizejs.com/manual/migrations.html) on the official documentation.
 
-
-The next step is : create a seed 
-
-I've created this, with this command : 
+I've created a seed  this, with this command : 
 ```
 sequelize seed:generate --name demo-user
 ```
