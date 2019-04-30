@@ -1,6 +1,9 @@
 # Back End using sequelize client
 
 Example to show the power of sequelize client following the documentation http://docs.sequelizejs.com/manual/migrations.html
+# BD
+
+https://user-images.githubusercontent.com/17790050/56949780-0baefe80-6b34-11e9-8850-452453240211.png
 
 ## Getting Started
 
