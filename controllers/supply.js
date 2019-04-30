@@ -234,10 +234,10 @@ module.exports = {
                     attributes: ['id'],
                     through: {
                         model: SupplyProduct,
-                       /* attributes: {
-                            include: ['id', 'quantity'],
-                            exclude: ['createdAt', 'updatedAt', 'supply_id', 'product_id']
-                        }*/
+                        /* attributes: {
+                             include: ['id', 'quantity'],
+                             exclude: ['createdAt', 'updatedAt', 'supply_id', 'product_id']
+                         }*/
                     },
                     // through:{
                     //     model:TypeProduct
@@ -250,36 +250,28 @@ module.exports = {
                         message: 'supply Not Found',
                     });
                 }
-                //return res.status(200).send(supply);
                 let sProducts = supply.products;
-                // console.log("NUMBER---" + (sProducts.length));
-                //
-                return sProducts[0].SupplyProduct.update({
-                    quantity: 887
-                })
-                    .then((supplyProduct) => res.status(200).send(supplyProduct))
-                    .catch((error) => res.status(400).send(error));
 
-                /*  if (sProducts.length > 0) {
-                      let indexSupplyProduct = 0;
-                      sProducts.forEach(p => {
-                          //console.log(p.SupplyProduct);
-                          console.log("indexSupplyProduct---" + indexSupplyProduct);
-                          console.log(req.body.products[indexSupplyProduct].SupplyProduct.quantity);
-                          indexSupplyProduct++;
-                          /!*  p.SupplyProduct.update({
-                                quantity: 100
-                            }).then((s) => {
-                                indexSupplyProduct++;
-                                if (!s) {
-                                    return res.status(404).send({
-                                        message: 'supplyProduct Not Updated',
-                                    });
-                                }
-                                return res.status(200).send(s);
-                            })*!/
-                      })
-                  }*/
+                if (sProducts.length > 0) {
+                    let indexSupplyProduct = 0;
+                    sProducts.forEach(p => {
+
+                        sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
+                            quantity: req.body.products[indexSupplyProduct].SupplyProduct.quantity
+                        });
+                        indexSupplyProduct++;
+                        /*  .then((s) => {
+                              indexSupplyProduct++;
+                              if (!s) {
+                                  return res.status(404).send({
+                                      message: 'supplyProduct Not Updated',
+                                  });
+                              }
+                              return res.status(200).send(s);
+                          })
+                          .catch((error) => res.status(400).send(error));*/
+                    })
+                }
 
             })
             .catch((error) => res.status(400).send(error));
