@@ -223,7 +223,7 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
-   updateSupplyProduct(req, res) {
+    updateSupplyProduct(req, res) {
         return Supply
             .findOne({
                 where: {id: req.params.id},
@@ -255,22 +255,15 @@ module.exports = {
                 if (sProducts.length > 0) {
                     let indexSupplyProduct = 0;
 
-                    sProducts.forEach(p => {
-                       return sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
-                            quantity: req.body.products[indexSupplyProduct].SupplyProduct.quantity
+                    return new Promise(function (resolve, reject) {
+                        sProducts.forEach(p => {
+                            sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
+                                quantity: req.body.products[indexSupplyProduct].SupplyProduct.quantity
+                            })
+                                .catch(r => reject(r))
+                            indexSupplyProduct++;
                         });
-                        indexSupplyProduct++;
-                        // CHECK THE RETURN AWAIT/ASYNC
-                        /*  .then((s) => {
-                              indexSupplyProduct++;
-                              if (!s) {
-                                  return res.status(404).send({
-                                      message: 'supplyProduct Not Updated',
-                                  });
-                              }
-                              return res.status(200).send(s);
-                          })
-                          .catch((error) => res.status(400).send(error));*/
+                        resolve("OK")
                     })
                 }
 
@@ -278,12 +271,12 @@ module.exports = {
             .then((s) => {
                 console.log("SSSS");
                 console.log(s);
-               /* if (!s) {
+                if (!s) {
                     return res.status(404).send({
                         message: 'supplyProduct Not Updated',
                     });
-                }*/
-                return res.status(200).send();
+                }
+                return res.status(200).send(s);
             })
             .catch((error) => res.status(400).send(error));
     }
