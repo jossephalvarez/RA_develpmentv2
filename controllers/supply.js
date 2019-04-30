@@ -254,8 +254,9 @@ module.exports = {
 
                 if (sProducts.length > 0) {
                     let indexSupplyProduct = 0;
+
                     sProducts.forEach(p => {
-                       sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
+                       return sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
                             quantity: req.body.products[indexSupplyProduct].SupplyProduct.quantity
                         });
                         indexSupplyProduct++;
@@ -273,6 +274,16 @@ module.exports = {
                     })
                 }
 
+            })
+            .then((s) => {
+                console.log("SSSS");
+                console.log(s);
+               /* if (!s) {
+                    return res.status(404).send({
+                        message: 'supplyProduct Not Updated',
+                    });
+                }*/
+                return res.status(200).send();
             })
             .catch((error) => res.status(400).send(error));
     }
