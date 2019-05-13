@@ -255,29 +255,35 @@ module.exports = {
                 if (sProducts.length > 0) {
                     let indexSupplyProduct = 0;
 
-                    return new Promise(function (resolve, reject) {
-                        sProducts.forEach(p => {
-                            sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
-                                quantity: req.body.products[indexSupplyProduct].SupplyProduct.quantity
+                    return Promise.all(
+                        sProducts.map(p => {
+                            return new Promise(function (resolve, reject) {
+                                sProducts[indexSupplyProduct].SupplyProduct.updateAttributes({
+                                    quantity: req.body.products[indexSupplyProduct].SupplyProduct.quantity
+                                })
+                                    .catch(r => reject(r));
+                                indexSupplyProduct++;
+                                resolve(p)
                             })
-                                .catch(r => reject(r))
-                            indexSupplyProduct++;
-                        });
-                        resolve("OK")
-                    })
+                        })
+                    )
                 }
 
             })
-            .then((s) => {
-                console.log("SSSS");
-                console.log(s);
-                if (!s) {
-                    return res.status(404).send({
-                        message: 'supplyProduct Not Updated',
-                    });
-                }
-                return res.status(200).send(s);
+            .then(supplyUdated => {
+                console.log(supplyUdated);
+                return res.status(200).send(supplyUdated);
             })
             .catch((error) => res.status(400).send(error));
+    },
+    //TODO test with another
+    update2(req, res) {
+        Supply.findAll({
+            where: {UserId: req.params.UserId}
+        }).then((instances) => {
+            instances.forEach(function (instance) {
+                instance.updateAttributes({y: false});
+            });
+        });
     }
 };
