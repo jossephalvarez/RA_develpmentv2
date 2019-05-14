@@ -18,6 +18,7 @@ module.exports = {
             },
             dni: {
                 allowNull: false,
+                unique: true,
                 type: Sequelize.STRING
             },
             nickname: {
@@ -26,10 +27,12 @@ module.exports = {
             },
             phone: {
                 allowNull: false,
+                unique: true,
                 type: Sequelize.STRING
             },
             email: {
                 allowNull: false,
+                unique: true,
                 type: Sequelize.STRING
             },
             address: {
