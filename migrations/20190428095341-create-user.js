@@ -10,11 +10,24 @@ module.exports = {
             },
             name: {
                 allowNull: false,
-                type: Sequelize.STRING
+                type: Sequelize.STRING(50),
+                validate: {
+                    len: {
+                        args: [0, 50],
+                        msg: 'El nombre tiene demasiados carácteres'
+                    }
+                }
             },
             surname: {
                 allowNull: false,
-                type: Sequelize.STRING
+                type: Sequelize.STRING(100),
+                validate: {
+                    len: {
+                        args: [0, 100],
+                        msg: 'Los apellidos tienen demasiados carácteres'
+                    }
+                }
+
             },
             dni: {
                 allowNull: false,
@@ -33,7 +46,14 @@ module.exports = {
             email: {
                 allowNull: false,
                 unique: true,
-                type: Sequelize.STRING
+                type: Sequelize.STRING(100),
+                validate: {
+                    isEmail: {
+                        args: true,
+                        msg: 'Please enter a valid email address'
+                    },
+                },
+
             },
             address: {
                 type: Sequelize.STRING
@@ -42,7 +62,9 @@ module.exports = {
                 type: Sequelize.BOOLEAN
             },
             password: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull: false,
+
             },
             active: {
                 type: Sequelize.BOOLEAN

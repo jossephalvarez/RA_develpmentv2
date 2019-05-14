@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 const typeController = require('../controllers').type;
 const supplyController = require('../controllers').supply;
 const productController = require('../controllers').product;
@@ -48,5 +49,6 @@ router.delete('/api/location/:id', locationController.delete);
 /*User Router*/
 router.get('/api/user', userController.list);
 router.post('/api/signup', userController.add);
+router.post('/api/login', userController.login);
 
 module.exports = router;
