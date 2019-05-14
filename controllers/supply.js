@@ -225,13 +225,25 @@ module.exports = {
                     return Promise.all(
                         products.map(p => {
                             return new Promise(function (resolve, reject) {
-                                SupplyProduct.create({
-                                    supply_id: supply.id,
-                                    product_id: p.product_id,
-                                    quantity: p.quantity
-                                }).then((supplyProduct) => {
-                                    resolve(supplyProduct);
-                                }).catch(e => reject(e))
+
+                                Product.findById(p.product_id).then((product) => {
+                                    if (!product) {
+                                        reject(e)
+                                    }
+                                    SupplyProduct.create({
+                                        supply_id: supply.id,
+                                        product_id: product.id,
+                                        quantity: p.quantity
+                                    })
+                                        .then((supplyProduct) => {
+                                            if (!supplyProduct) {
+                                                reject(e)
+                                            }
+                                            resolve(supplyProduct);
+                                        })
+
+                                }).catch(error => reject(error));
+
                             })
 
                         })
