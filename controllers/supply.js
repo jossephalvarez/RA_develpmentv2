@@ -161,7 +161,7 @@ module.exports = {
         }
 
     },
-    add(req, res) {
+    add2(req, res) {
         return Supply
             .create({
                 date: req.body.date,
@@ -204,6 +204,46 @@ module.exports = {
                         message: 'supplyProduct Not created',
                     });
                 }
+            })
+            .catch((error) => res.status(400).send(error));
+    },
+    add(req, res) {
+        return Supply
+            .create({
+                date: req.body.date,
+                location_id: req.body.location_id,
+                UserId: req.body.UserId
+            })
+            .then((supply) => {
+                if (!supply) {
+                    return res.status(404).send({
+                        message: 'supply Not created',
+                    });
+                }
+                let products = req.body.listProducts;
+                if (products.length > 0) {
+                    return Promise.all(
+                        products.map(p => {
+                            return new Promise(function (resolve, reject) {
+                                SupplyProduct.create({
+                                    supply_id: supply.id,
+                                    product_id: p.product_id,
+                                    quantity: p.quantity
+                                }).then((supplyProduct) => {
+                                    resolve(supplyProduct);
+                                }).catch(e => reject(e))
+                            })
+
+                        })
+                    )
+                } else {
+                    return res.status(404).send({
+                        message: 'supplyProduct Not created',
+                    });
+                }
+            })
+            .then((rep) => {
+                res.status(200).send(rep)
             })
             .catch((error) => res.status(400).send(error));
     },
