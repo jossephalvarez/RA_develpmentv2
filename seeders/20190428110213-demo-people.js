@@ -5,9 +5,9 @@ module.exports = {
         return queryInterface.bulkInsert('users', [{
             name: 'Josseph',
             surname: 'Alvarez',
-            dni: '77934544',
+            dni: '123',
             nickname: 'Zino',
-            phone: '615224558',
+            phone: '1234',
             email: 'jjsj@gmail.com',
             is_provider: false,
             password: '123456',
@@ -17,23 +17,23 @@ module.exports = {
             name: 'Juan',
             surname: 'Provider1',
             dni: '77934544e',
-            nickname: 'Zino',
+            nickname: 'Zino1',
             phone: '615224558',
-            email: 'jjsj@gmail.com',
+            email: 'cea@gmail.com',
             password: '123456',
             createdAt: new Date(), updatedAt: new Date()
         },
-            {
+        {
 
-                name: 'Albert',
-                surname: 'Linares',
-                dni: '77934544s',
-                nickname: 'Zino',
-                phone: '615224558',
-                email: 'jjsj@gmail.com',
-                password: '123456',
-                createdAt: new Date(), updatedAt: new Date()
-            }
+            name: 'Albert',
+            surname: 'Linares',
+            dni: '77934544s',
+            nickname: 'Zino2',
+            phone: '123456',
+            email: 'cea2@gmail.com',
+            password: '123456',
+            createdAt: new Date(), updatedAt: new Date()
+        }
 
         ], {});
     },

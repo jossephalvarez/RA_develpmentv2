@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const passport = require('passport-jwt');
 
 const typeController = require('../controllers').type;
 const supplyController = require('../controllers').supply;
@@ -27,7 +27,7 @@ router.get('/api/product/supplies', productController.listWithSupplies);
 router.get('/api/product/:id', productController.getById);
 
 /*Supply Router*/
-router.get('/api/supply', supplyController.list);
+router.get('/api/supply',supplyController.list);
 router.post('/api/supply', supplyController.add);
 router.get('/api/supply/products', supplyController.listProducts);
 router.get('/api/supply/:id', supplyController.getById);

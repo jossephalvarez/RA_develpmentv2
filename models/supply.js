@@ -2,8 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Supply = sequelize.define('Supply', {
         date: DataTypes.STRING,
-        location_id: DataTypes.INTEGER,
-        UserId: DataTypes.INTEGER
+       // location_id: DataTypes.INTEGER,
+        //UserId: DataTypes.INTEGER
     }, {});
     Supply.associate = function (models) {
         // associations can be defined here

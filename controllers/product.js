@@ -9,7 +9,11 @@ module.exports = {
             .findAll({
                 include: [{
                     model: Type,
-                    as: 'type'
+                    as: 'type',
+                    attributes: {
+                             //include: ['id', 'name'],
+                             exclude: ['createdAt', 'updatedAt']
+                         }
                 }]
             })
             .then((products) => res.status(200).send(products))
